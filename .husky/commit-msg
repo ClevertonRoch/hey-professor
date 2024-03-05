@@ -1,0 +1,33 @@
+#!/bin/bash
+. "$(dirname -- "$0")/_/husky.sh"
+# Definição de cores para uso na saída
+NC='\033[0m'
+BBlue='\033[1;34m'
+BRed='\033[1;31m'
+
+
+REGEX_ISSUE_ID="[a-zA-Z0-9,\.\_\-]+-[0-9]+"
+
+# Obter o nome da branch atual
+BRANCH_NAME=$(git symbolic-ref --short HEAD)
+
+# Extrair o identificador de problema da branch
+ISSUE_ID=$(echo "$BRANCH_NAME" | grep -o -E "$REGEX_ISSUE_ID")
+
+# Ler a mensagem de commit do arquivo especificado
+COMMIT_MESSAGE=$(cat "$1")
+
+# Verificar se não há nenhum identificador de problema na branch
+if [ -z "$ISSUE_ID" ]; then
+	echo -e "${BRed}A branch não está no padrão definido.${NC}"
+	exit 1
+fi
+
+# i.g. HEY-1: HEY-1: my feature
+if [[ $COMMIT_MESSAGE == $ISSUE_ID* ]]; then
+    exit 0
+fi
+
+echo "$ISSUE_ID: $COMMIT_MESSAGE" >$1
+ 
+
