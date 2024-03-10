@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Rules\EndWithQuestionMark;
-use Closure;
 use Illuminate\Http\RedirectResponse;
 
 class QuestionController extends Controller
@@ -16,8 +15,8 @@ class QuestionController extends Controller
             'question' => [
                 'required',
                 'min:10',
-                new EndWithQuestionMark()
-                ]
+                new EndWithQuestionMark(),
+            ],
         ]);
 
         Question::query()->create($attributes);

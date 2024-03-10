@@ -7,7 +7,7 @@ use function Pest\Laravel\assertDatabaseCount;
 use function Pest\Laravel\assertDatabaseHas;
 use function Pest\Laravel\post;
 
-it('should be able to create a new question bigger than 255 charcters', function(){
+it('should be able to create a new question bigger than 255 charcters', function () {
 
     // Arrage
     $user = User::factory()->create();
@@ -27,7 +27,7 @@ it('should be able to create a new question bigger than 255 charcters', function
 
 });
 
-it('should check if ends with question mark', function(){
+it('should check if ends with question mark', function () {
 
     // Arrage
     $user = User::factory()->create();
@@ -42,10 +42,9 @@ it('should check if ends with question mark', function(){
     $request->assertSessionHasErrors(['question']);
     assertDatabaseCount('questions', 0);
 
-
 });
 
-it('should have at least 10 characters', function(){
+it('should have at least 10 characters', function () {
 
     // Arrage
     $user = User::factory()->create();
@@ -60,6 +59,5 @@ it('should have at least 10 characters', function(){
 
     $request->assertSessionHasErrors(['question']);
     assertDatabaseCount('questions', 0);
-
 
 });
