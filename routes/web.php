@@ -3,20 +3,20 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuestionController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     if (app()->isLocal()) {
         auth()->loginUsingId(1);
+
         return to_route('dashboard');
     } else {
-        return view('welcome');
+        return view('register');
     }
 
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard',DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::post('/question/store', [QuestionController::class, 'store'])->name('question.store');
