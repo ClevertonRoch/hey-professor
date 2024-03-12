@@ -8,6 +8,8 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Models\Vote;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -42,4 +44,14 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function like(Question $question): void
+    {
+        Vote::query()->create([
+            'question_id' => $question->id,
+            'user_id' => auth()->id(),
+            'like' => 1,
+            'unlike' => 0
+        ]);
+    }
 }
