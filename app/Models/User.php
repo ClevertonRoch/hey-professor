@@ -57,6 +57,7 @@ class User extends Authenticatable
 
     public function like(Question $question): void
     {
+
         $this->votes()->updateOrCreate(['question_id' => $question->id],
             [
             'user_id' => auth()->id(),
