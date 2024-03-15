@@ -17,7 +17,7 @@ justify-between items-center">
             </button>
         </x-form>
 
-        <x-form :action="route('question.like', $questions)" id="form-unlike-{{ $questions->id }}">
+        <x-form :action="route('question.unlike', $questions)" id="form-unlike-{{ $questions->id }}">
             <button class="flex items-center space-x-2 text-red-600" type="submit" form="form-unlike-{{ $questions->id }}">
                 <x-icons.thumbs-up class="w-5 h-5 text-red-300 hover:w-6 hover:h-6 hover:text-red-400 cursor-pointer"
                                    id="thumb-up"/>
