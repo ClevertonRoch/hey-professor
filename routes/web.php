@@ -5,7 +5,7 @@ use App\Http\Controllers\{DashboardController, ProfileController, QuestionContro
 
 Route::get('/', function () {
     if (app()->isLocal()) {
-        auth()->loginUsingId(1);
+        auth()->loginUsingId(2);
 
         return to_route('dashboard');
     } else {
@@ -17,7 +17,7 @@ Route::get('/', function () {
 Route::get('/dashboard',DashboardController::class)->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::post('/question.like/{question}', Question\LikeController::class )->name('question.like');
-
+//Route::post('/question.unlike/{question}', Question\LikeController::class )->name('question.like');
 Route::middleware('auth')->group(function () {
     Route::post('/question/store', [QuestionController::class, 'store'])->name('question.store');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
