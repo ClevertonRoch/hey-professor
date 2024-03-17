@@ -61,3 +61,20 @@ it('should have at least 10 characters', function () {
     assertDatabaseCount('questions', 0);
 
 });
+
+it('should br able to create a new question bigger than 255 characters', function () {
+    // Arrage
+    $user = User::factory()->create();
+    actingAs($user);
+
+    // Act
+    post(route('question.store'), [
+        'question' => str_repeat('*', 254).'?',
+    ]);
+
+    //Assert
+
+    assertDatabaseHas('questions',['question' => str_repeat('*', 254). '?',
+        'draft' => true,
+    ]);
+});

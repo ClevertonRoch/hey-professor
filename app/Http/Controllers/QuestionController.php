@@ -19,7 +19,14 @@ class QuestionController extends Controller
             ],
         ]);
 
-        Question::query()->create($attributes);
+        Question::query()
+            ->create(
+                [
+                    'question' => request()->question,
+                    'draft' => true
+                ]
+//                array_merge($attributes, ['draft' => true])
+            );
 
         return to_route('dashboard');
 
