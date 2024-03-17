@@ -13,7 +13,6 @@ class LikeController extends Controller
     {
         /** @var User $user */
             $user = auth()->user();
-
             $user->like($question);
 
 //        auth()->user()->like($question);
