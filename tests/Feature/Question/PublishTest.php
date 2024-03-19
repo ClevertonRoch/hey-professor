@@ -24,7 +24,7 @@ it('should be able to publish a question', closure: function (){
     }
 });
 
-it('should make sure that only person who has created the question can publish the question', function () {
+it('it should make sure that only person who has created the question can publish the question', function () {
 
     $rightUser = User::factory()->create();
     $wrongUser = User::factory()->create();
