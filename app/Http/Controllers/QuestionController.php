@@ -18,8 +18,8 @@ class QuestionController extends Controller
                 new EndWithQuestionMark(),
             ],
         ]);
-
-        Question::query()
+//        Question::query()
+        user()->questionBy()
             ->create(
                 [
                     'question' => request()->question,

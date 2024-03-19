@@ -54,6 +54,11 @@ class User extends Authenticatable
         return $this->hasMany(Vote::class);
     }
 
+    public function questionBy(): HasMany
+    {
+        return $this->hasMany(Question::class, 'created_by');
+    }
+
 
     public function like(Question $question): void
     {
@@ -64,7 +69,8 @@ class User extends Authenticatable
             'like' => 1,
             'unlike' => 0
         ]);
-    }public function unlike(Question $question): void
+    }
+    public function unlike(Question $question): void
     {
         $this->votes()->updateOrCreate(['question_id' => $question->id],
             [

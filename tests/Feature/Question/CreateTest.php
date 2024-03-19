@@ -31,6 +31,7 @@ it('should check if ends with question mark', function () {
 
     // Arrage
     $user = User::factory()->create();
+
     actingAs($user);
 
     // Act
