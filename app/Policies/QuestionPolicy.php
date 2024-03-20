@@ -4,7 +4,6 @@ namespace App\Policies;
 
 use App\Models\Question;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
 
 class QuestionPolicy
 {
@@ -15,6 +14,4 @@ class QuestionPolicy
     {
         return $question->createdBy()->is($user);
     }
-
-
 }

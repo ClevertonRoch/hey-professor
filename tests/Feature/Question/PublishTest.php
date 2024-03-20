@@ -1,12 +1,12 @@
 <?php
 
-use App\Models\User;
 use App\Models\Question;
+use App\Models\User;
 
-use function Pest\Laravel\{actingAs, put};
+use function Pest\Laravel\actingAs;
+use function Pest\Laravel\put;
 
-
-it('should be able to publish a question', closure: function (){
+it('should be able to publish a question', closure: function () {
 
     $user = User::factory()->create();
     actingAs($user);
@@ -19,7 +19,7 @@ it('should be able to publish a question', closure: function (){
 
     $question->refresh();
 
-    if (!empty(expect($question)->draft)) {
+    if (! empty(expect($question)->draft)) {
         expect($question)->draft->toBeFalse();
     }
 });
@@ -28,7 +28,7 @@ it('it should make sure that only person who has created the question can publis
 
     $rightUser = User::factory()->create();
     $wrongUser = User::factory()->create();
-    $question  = Question::factory()->create(['draft' => true, 'created_by' => $rightUser->id]);
+    $question = Question::factory()->create(['draft' => true, 'created_by' => $rightUser->id]);
 
     $this->actingAs($wrongUser);
 
