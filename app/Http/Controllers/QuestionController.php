@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 class QuestionController extends Controller
 {
 
+
     public function index(): View
     {
         $questions = user()->questionBy()->get();
@@ -44,6 +45,11 @@ class QuestionController extends Controller
 
         return back();
 //        return to_route('dashboard');
+
+    }
+
+    public function edit(Question $question)
+    {
 
     }
 

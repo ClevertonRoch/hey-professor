@@ -29,7 +29,7 @@ it('should be able to list all questions created by me', function () {
 
     /** @var Question $q */
     foreach ($wrongQuestions as $q) {
-        $response->assertDontSee($q->question);
+        $response->assertDontSee($q);
     }
 
 });
