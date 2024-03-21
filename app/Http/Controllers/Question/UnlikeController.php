@@ -7,7 +7,6 @@ use App\Models\Question;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 
-
 class UnlikeController extends Controller
 {
     public function __invoke(Question $question): RedirectResponse

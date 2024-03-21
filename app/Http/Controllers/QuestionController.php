@@ -4,10 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Rules\EndWithQuestionMark;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
 class QuestionController extends Controller
 {
+
+    public function index(): View
+    {
+        $questions = user()->questionBy()->get();
+
+        return view('question.index', [
+            'questions'         => $questions
+        ]);
+
+    }
+
+
     public function store(): RedirectResponse
     {
 
@@ -18,10 +32,30 @@ class QuestionController extends Controller
                 new EndWithQuestionMark(),
             ],
         ]);
+        //        Question::query()
+        user()->questionBy()
+            ->create(
+                [
+                    'question' => request()->question,
+                    'draft' => true,
+                ]
+                //                array_merge($attributes, ['draft' => true])
+            );
 
-        Question::query()->create($attributes);
+        return back();
+//        return to_route('dashboard');
 
-        return to_route('dashboard');
+    }
 
+    /**
+     * @throws AuthorizationException
+     */
+    public function destroy(Question $question): RedirectResponse
+    {
+        $this->authorize('destroy', $question);
+
+        $question->delete();
+
+        return back();
     }
 }

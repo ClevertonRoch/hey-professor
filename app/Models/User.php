@@ -9,8 +9,6 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-use App\Models\Vote;
-
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -54,23 +52,29 @@ class User extends Authenticatable
         return $this->hasMany(Vote::class);
     }
 
+    public function questionBy(): HasMany
+    {
+        return $this->hasMany(Question::class, 'created_by');
+    }
 
     public function like(Question $question): void
     {
 
         $this->votes()->updateOrCreate(['question_id' => $question->id],
             [
-            'user_id' => auth()->id(),
-            'like' => 1,
-            'unlike' => 0
-        ]);
-    }public function unlike(Question $question): void
+                'user_id' => auth()->id(),
+                'like' => 1,
+                'unlike' => 0,
+            ]);
+    }
+
+    public function unlike(Question $question): void
     {
         $this->votes()->updateOrCreate(['question_id' => $question->id],
             [
-            'user_id' => auth()->id(),
-            'like' => 0,
-            'unlike' => 1
-        ]);
+                'user_id' => auth()->id(),
+                'like' => 0,
+                'unlike' => 1,
+            ]);
     }
 }
