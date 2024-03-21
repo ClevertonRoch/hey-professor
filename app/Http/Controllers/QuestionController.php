@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
-use App\Models\User;
 use App\Rules\EndWithQuestionMark;
+use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
@@ -45,5 +45,17 @@ class QuestionController extends Controller
         return back();
 //        return to_route('dashboard');
 
+    }
+
+    /**
+     * @throws AuthorizationException
+     */
+    public function destroy(Question $question): RedirectResponse
+    {
+        $this->authorize('destroy', $question);
+
+        $question->delete();
+
+        return back();
     }
 }
