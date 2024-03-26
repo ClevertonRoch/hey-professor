@@ -20,8 +20,6 @@ it('should be able to create a new question bigger than 255 charcters', function
 
     //Assert
 
-
-
     assertDatabaseCount('questions', 1);
     assertDatabaseHas('questions', ['question' => str_repeat('*', 254).'?']);
 

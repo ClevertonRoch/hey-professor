@@ -11,7 +11,6 @@ it('should be able to destroy a question', closure: function () {
 
     $user = User::factory()->create();
 
-
     $question = Question::factory()
         ->for($user, 'createdBy')
         ->create(['draft' => true]);
