@@ -2,8 +2,8 @@
 
 use App\Models\Question;
 use App\Models\User;
+
 use function Pest\Laravel\actingAs;
-use function Pest\Laravel\delete;
 use function Pest\Laravel\get;
 
 it('should be able to open a question to edit', function () {
@@ -59,5 +59,3 @@ it('should make sure that only the person who has created the question can edit 
     get(route('question.edit', $question))->assertSuccessful();
 
 });
-
-

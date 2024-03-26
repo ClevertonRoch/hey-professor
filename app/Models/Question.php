@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property bool $draft
+ * @property mixed $question
  */
 class Question extends Model
 {

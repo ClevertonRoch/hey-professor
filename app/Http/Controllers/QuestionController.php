@@ -10,18 +10,15 @@ use Illuminate\Http\RedirectResponse;
 
 class QuestionController extends Controller
 {
-
-
     public function index(): View
     {
         $questions = user()->questionBy()->get();
 
         return view('question.index', [
-            'questions'         => $questions
+            'questions' => $questions,
         ]);
 
     }
-
 
     public function store(): RedirectResponse
     {
@@ -44,7 +41,7 @@ class QuestionController extends Controller
             );
 
         return back();
-//        return to_route('dashboard');
+        //        return to_route('dashboard');
 
     }
 
@@ -58,9 +55,20 @@ class QuestionController extends Controller
         return view('question.edit', compact('question'));
     }
 
+    /**
+     * @throws AuthorizationException
+     */
     public function update(Question $question): RedirectResponse
     {
         $this->authorize('update', $question);
+
+        request()->validate([
+            'question' => [
+                'required',
+                'min:10',
+                new EndWithQuestionMark(),
+            ],
+        ]);
 
         $question->question = request()->question;
 
@@ -68,7 +76,6 @@ class QuestionController extends Controller
 
         return back();
     }
-
 
     /**
      * @throws AuthorizationException
