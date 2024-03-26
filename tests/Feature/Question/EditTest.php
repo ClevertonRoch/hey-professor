@@ -51,10 +51,13 @@ it('should make sure that only the person who has created the question can edit 
     $question = Question::factory()->create(['draft' => true, 'created_by' => $rightUser->id]);
 
     actingAs($wrongUser);
+
     get(route('question.edit', $question))->assertForbidden();
 
     actingAs($rightUser);
+
     get(route('question.edit', $question))->assertSuccessful();
 
 });
+
 

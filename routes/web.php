@@ -27,6 +27,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/question.publish/{question}', Question\PublishController::class)->name('question.publish');
     Route::post('/question/store', [QuestionController::class, 'store'])->name('question.store');
     Route::delete('/question/{question}', [QuestionController::class, 'destroy'])->name('question.destroy');
+    Route::put('/question/{question}', [QuestionController::class, 'update'])->name('question.update');
     Route::get('/question/{question}/edit', [QuestionController::class, 'edit'])->name('question.edit');
 
 
@@ -34,5 +35,5 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
- 
+
 require __DIR__.'/auth.php';
