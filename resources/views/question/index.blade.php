@@ -38,10 +38,16 @@
                         <x-table.td>
                             <div class="space-y-1 text-start">
 {{--                                 Publish button--}}
-                            <x-form :action="route('question.publish', $question)" put>
-                                <button type="submit" class="hover:underline hover:text-blue-400 text-blue-500">
-                                    Publicar
+                            <a href="{{ route('question.edit', $question) }}">
+                                <button type="submit" class="hover:underline hover:text-green-400 text-green-500">
+                                    Editar
                                 </button>
+                            </a>
+
+                            <x-form :action="route('question.publish', $question)" put>
+                                    <button type="submit" class="hover:underline hover:text-blue-400 text-blue-500">
+                                        Publicar
+                                    </button>
                             </x-form>
 {{--                                Delete button--}}
                             <x-form :action="route('question.destroy', $question)" delete>

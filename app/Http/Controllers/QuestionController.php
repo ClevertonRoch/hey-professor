@@ -74,7 +74,7 @@ class QuestionController extends Controller
 
         $question->save();
 
-        return back();
+        return to_route('question.index');
     }
 
     /**
